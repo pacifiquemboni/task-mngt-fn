@@ -4,3 +4,4 @@ node_modules
 
 # Prisma auto-generated client
 src/generated/
+./dist
