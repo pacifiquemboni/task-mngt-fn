@@ -25,7 +25,13 @@ export const getTags = async (req: AuthRequest, res: Response) => {
 };
 
 export const deleteTag = async (req: AuthRequest, res: Response) => {
-  const { id } = req.params;
+  const idParam = req.params.id;
+
+  if (!idParam || Array.isArray(idParam)) {
+    return res.status(400).json({ message: "Invalid tag id" });
+  }
+
+  const id = idParam;
 
   await prisma.tag.delete({ where: { id, userId: req.user!.id } });
 
