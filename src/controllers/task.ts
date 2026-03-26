@@ -5,7 +5,7 @@ import prisma from "../lib/prisma";
 export const createTask = async (req: AuthRequest, res: Response) => {
   const { content, startDate, dueDate, tagId } = req.body;
 
-  if (new Date(dueDate) < new Date()) {
+  if (new Date(dueDate) < new Date(startDate)) {
     return res.status(400).json({ message: "Past due date not allowed" });
   }
 
