@@ -20,12 +20,20 @@ model User {
   tags     Tag[]
 }
 
+enum TaskStatus {
+  PENDING
+  PROGRESS
+  DONE
+  CANCELLED
+}
+
 model Task {
   id        String   @id @default(uuid())
   content   String
   startDate DateTime
   dueDate   DateTime
   userId    String
+  status    TaskStatus @default(PENDING)     
   tagId     String?
   user      User     @relation(fields: [userId], references: [id])
   tag       Tag?     @relation(fields: [tagId], references: [id])
